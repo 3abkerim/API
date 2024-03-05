@@ -94,7 +94,10 @@ navigator.geolocation.getCurrentPosition(function(position) {
         if(data.features && data.features.length > 0) {
             const address = data.features[0].properties;
             console.log(address.city); 
+            localStorage.setItem("city",address.city);
 
+
+            //get weather by city name
 
             let city = address.city; 
             const apiKey = '02f0811d6a52bbd75347123f28568515'; 
@@ -106,7 +109,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
                     const resultElement = document.getElementById('res'); 
                     if (data.cod === 200) { 
                         console.log(data);
-                        resultElement.innerHTML = `Weather in ${city}: ${data.weather[0].main}, Temperature: ${data.main.temp}°C`;
+                        resultElement.innerHTML = `La temperature à ${city}: ${data.weather[0].main}, Temperature: ${data.main.temp}°C`;
                     } else {
                         resultElement.innerHTML = 'City not found';
                     }
@@ -115,9 +118,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
                     console.error('Error fetching data:', err.message);
                 });
 
-
-
-
+            // ! get weather by city name
 
 
         } else {
@@ -130,6 +131,10 @@ navigator.geolocation.getCurrentPosition(function(position) {
 }, function(error) {
     console.log(error);
 });
+// ! geolocalisation par GeoLocation_API
+
+const ville = localStorage.getItem("city");
+console.log(ville);
 
 
 
@@ -148,6 +153,5 @@ navigator.geolocation.getCurrentPosition(function(position) {
 // });
   
 
-//trouver la ville par geolocalisation
 
 
